@@ -78,4 +78,22 @@ describe('<OTPScreen />', () => {
 
     jest.useRealTimers();
   });
+
+  test('shows failed message when OTP is incorrect', async () => {
+    jest.useFakeTimers();
+    const { getAllByTestId, queryByText } = render(<OTPScreen />);
+    const inputs = getAllByTestId('otp-input');
+
+    // Enter incorrect OTP
+    for (let i = 0; i < inputs.length; i++) {
+      fireEvent.changeText(inputs[i], '9');
+    }
+
+    await act(async () => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    expect(queryByText('failed')).toBeTruthy();
+    jest.useRealTimers();
+  });
 });

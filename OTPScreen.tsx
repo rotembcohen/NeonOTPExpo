@@ -6,6 +6,7 @@ const OTPScreen = () => {
   const [otp, setOtp] = useState(Array(numInputs).fill(''));
   const [loading, setLoading] = useState(false);
   const [approved, setApproved] = useState(false);
+  const [failed, setFailed] = useState(false);
   const inputsRef = useRef<(TextInput | null)[]>([]);
 
   const handleChange = (text: string, idx: number) => {
@@ -28,12 +29,15 @@ const OTPScreen = () => {
   const handleSubmit = (value: string) => {
     setLoading(true);
     setApproved(false);
+    setFailed(false);
     setTimeout(() => {
       setLoading(false);
       if (value === '123456') {
         setApproved(true);
+        setFailed(false);
       } else {
         setOtp(Array(numInputs).fill(''));
+        setFailed(true);
         inputsRef.current[0]?.focus();
       }
     }, 1000);
@@ -60,7 +64,8 @@ const OTPScreen = () => {
         ))}
       </View>
       {loading && <ActivityIndicator testID="otp-loading" style={styles.feedback} />}
-      {approved && <Text style={styles.approvedText}>approved</Text>}
+  {approved && <Text style={styles.approvedText}>approved</Text>}
+  {failed && <Text style={styles.failedText}>failed</Text>}
     </View>
   );
 };
@@ -93,6 +98,14 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     color: 'green',
+    fontWeight: 'bold',
+    marginTop: 12,
+    fontSize: 18,
+  },
+  failedText: {
+    width: '100%',
+    textAlign: 'center',
+    color: 'red',
     fontWeight: 'bold',
     marginTop: 12,
     fontSize: 18,
