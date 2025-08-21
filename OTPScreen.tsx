@@ -79,7 +79,8 @@ const OTPScreen: React.FC<OTPScreenProps> = ({ onBack }) => {
         </Pressable>
       )}
       <View style={styles.card}>
-        <Text style={styles.title}>Enter OTP</Text>
+    <Text style={styles.title}>Enter OTP</Text>
+    <Text style={styles.instruction}>Please enter the code sent to you via text message.</Text>
         <View style={styles.inputsRow}>
           {Array.from({ length: numInputs }).map((_, idx) => {
             let borderColor = theme.colors.pri2;
@@ -158,6 +159,13 @@ const styles = StyleSheet.create({
     letterSpacing: -0.5,
     textAlign: 'center',
   },
+   instruction: {
+     color: theme.colors.text2,
+     fontSize: 15,
+     textAlign: 'center',
+     marginBottom: theme.spacing[4],
+     fontFamily: theme.font.ui,
+   },
   inputsRow: {
     flexDirection: 'row',
     justifyContent: 'center',

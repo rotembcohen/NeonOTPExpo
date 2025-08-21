@@ -17,7 +17,7 @@ export default function App() {
             onPress={() => setShowOTP(true)}
             accessibilityRole="button"
           >
-            <Text style={styles.buttonText}>Open OTP</Text>
+            <Text style={styles.buttonText}>Verify Code</Text>
           </Pressable>
         </View>
       ) : (

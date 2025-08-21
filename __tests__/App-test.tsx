@@ -18,9 +18,9 @@ describe('<App />', () => {
     getByText('Welcome!');
   });
 
-  test('shows OTP screen when "Open OTP" button is pressed', () => {
+  test('shows OTP screen when "Verify Code" button is pressed', () => {
     const { getByText, getAllByTestId } = render(<App />);
-    const openOtpButton = getByText('Open OTP');
+    const openOtpButton = getByText('Verify Code');
     fireEvent.press(openOtpButton);
     const inputs = getAllByTestId('otp-input');
     expect(inputs).toHaveLength(6);
