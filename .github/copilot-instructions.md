@@ -5,6 +5,16 @@
     Set `sound` to `true`
     </notify>
 
+    <use_tdd>
+    Whenever I ask you to implement a feature:
+    1. First outline your implementation as a multi-step plan.
+    2. Break down the process to steps that can be implemented as progressive code changes.
+    3. Implement the unit test required only for the next step.
+    4. Implement the code changes required to pass the test.
+    5. Verify the test passes
+    6. Iterate like this until completing the plan you outlined.
+    </use_tdd>
+
     <edit_file>
     At the end of ANY conversation and changes to files are made turn with me where you create or edit a file for me:
 
