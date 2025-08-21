@@ -47,21 +47,19 @@ describe('<OTPScreen />', () => {
     const { getAllByTestId, getByText, queryByText, queryByTestId } = render(<OTPScreen />);
     const inputs = getAllByTestId('otp-input');
 
-    // Enter correct OTP
-    await act(async () => {
-      for (let i = 0; i < 6; i++) {
+    expect(inputs.length).toBe(6);
+
+    // Enter correct OTP, one at a time, awaiting each update
+    for (let i = 0; i < 6; i++) {
+      await act(async () => {
         fireEvent.changeText(inputs[i], String(i + 1));
-      }
-    });
+      });
+    }
+
     // Wait for all inputs to be filled
     await waitFor(() => {
       const filledInputs = getAllByTestId('otp-input');
       expect(filledInputs.every(input => input.props.value.length === 1)).toBe(true);
-    });
-
-    // Fast-forward loading
-    await act(async () => {
-      jest.advanceTimersByTime(1000);
     });
 
     // Wait for loading indicator to disappear before asserting
@@ -74,11 +72,11 @@ describe('<OTPScreen />', () => {
     });
 
     // Now try incorrect OTP
-    await act(async () => {
-      for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 6; i++) {
+      await act(async () => {
         fireEvent.changeText(inputs[i], '9');
-      }
-    });
+      });
+    }
     // Wait for all inputs to be filled
     await waitFor(() => {
       const filledInputs = getAllByTestId('otp-input');
