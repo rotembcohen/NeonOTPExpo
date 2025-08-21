@@ -1,3 +1,9 @@
+---
+#tool:show-notification
+{
+    "message": "OTP input auto-focus and test implemented, all tests passing and changes committed.",
+    "sound": true
+}
 <rules>
     <notify>
     When you are done, use the #tool:show-notification tool to notify the user that you have completed the task.
