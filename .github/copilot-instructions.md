@@ -3,7 +3,7 @@
     Whenever I ask you to implement a feature:
     1. First outline your implementation as a multi-step plan.
     2. Break down the process to steps that can be implemented as progressive code changes.
-    3. Implement the unit test required only for the next step.
+    3. Implement the unit test required only for the next step. Only add tests if there are no existing tests for the functionality being implemented.
     4. Implement the code changes required to pass the test.
     5. Verify the test passes
     6. Iterate like this until completing the plan you outlined.
