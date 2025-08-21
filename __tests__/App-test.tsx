@@ -42,7 +42,7 @@ describe('<OTPScreen />', () => {
     // Optionally, check that the next input is ready for input (value is still empty)
   });
 
-  test('shows approved alert if OTP is correct, clears if incorrect', async () => {
+  test('shows approved alert if OTP is correct', async () => {
     jest.useFakeTimers();
     const { getAllByTestId, getByText, queryByText, queryByTestId } = render(<OTPScreen />);
     const inputs = getAllByTestId('otp-input');
@@ -70,6 +70,14 @@ describe('<OTPScreen />', () => {
     await waitFor(() => {
       expect(getByText('approved')).toBeTruthy();
     });
+
+    jest.useRealTimers();
+  });
+
+  test('shows failed message when OTP is incorrect, clears input', async () => {
+    jest.useFakeTimers();
+    const { getAllByTestId, queryByText, queryByTestId } = render(<OTPScreen />);
+    const inputs = getAllByTestId('otp-input');
 
     // Now try incorrect OTP
     for (let i = 0; i < 6; i++) {
@@ -101,37 +109,6 @@ describe('<OTPScreen />', () => {
       expect(queryByText('approved')).toBeNull();
     });
 
-    jest.useRealTimers();
-  });
-
-  test('shows failed message when OTP is incorrect', async () => {
-    jest.useFakeTimers();
-    const { getAllByTestId, queryByText, queryByTestId } = render(<OTPScreen />);
-    const inputs = getAllByTestId('otp-input');
-
-    // Enter incorrect OTP
-    await act(async () => {
-      for (let i = 0; i < inputs.length; i++) {
-        fireEvent.changeText(inputs[i], '9');
-      }
-    });
-    // Wait for all inputs to be filled
-    await waitFor(() => {
-      const filledInputs = getAllByTestId('otp-input');
-      expect(filledInputs.every(input => input.props.value.length === 1)).toBe(true);
-    });
-
-    await act(async () => {
-      jest.advanceTimersByTime(1000);
-    });
-
-    await waitFor(() => {
-      expect(queryByTestId('otp-loading')).toBeNull();
-    });
-
-    await waitFor(() => {
-      expect(queryByText('failed')).toBeTruthy();
-    });
     jest.useRealTimers();
   });
 
