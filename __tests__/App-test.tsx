@@ -1,10 +1,3 @@
-  test('calls onBack when back button is pressed', () => {
-    const onBack = jest.fn();
-    const { getByText } = render(<OTPScreen onBack={onBack} />);
-    const backButton = getByText(/back/i);
-    fireEvent.press(backButton);
-    expect(onBack).toHaveBeenCalled();
-  });
 import { render, fireEvent } from '@testing-library/react-native';
 import { act } from 'react-test-renderer';
 
@@ -102,5 +95,13 @@ describe('<OTPScreen />', () => {
 
     expect(queryByText('failed')).toBeTruthy();
     jest.useRealTimers();
+  });
+
+  test('calls onBack when back button is pressed', () => {
+    const onBack = jest.fn();
+    const { getByText } = render(<OTPScreen onBack={onBack} />);
+    const backButton = getByText(/back/i);
+    fireEvent.press(backButton);
+    expect(onBack).toHaveBeenCalled();
   });
 });
