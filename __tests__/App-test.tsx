@@ -1,4 +1,5 @@
 import { render, fireEvent } from '@testing-library/react-native';
+import { act } from 'react-test-renderer';
 
 import App from '../App';
 import OTPScreen from '../OTPScreen';
@@ -38,5 +39,43 @@ describe('<OTPScreen />', () => {
     expect(inputs[1].props.value).toBe('');
     expect(inputs[0].props.value).toBe('1');
     // Optionally, check that the next input is ready for input (value is still empty)
+  });
+
+  test('shows approved alert if OTP is correct, clears if incorrect', async () => {
+    jest.useFakeTimers();
+    const { getAllByTestId, getByText, queryByText } = render(<OTPScreen />);
+    const inputs = getAllByTestId('otp-input');
+
+    // Enter correct OTP
+    for (let i = 0; i < 6; i++) {
+      fireEvent.changeText(inputs[i], String(i + 1));
+    }
+
+    // Fast-forward loading
+    await act(async () => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    expect(getByText('approved')).toBeTruthy();
+
+    // Now try incorrect OTP
+    for (let i = 0; i < 6; i++) {
+      fireEvent.changeText(inputs[i], '9');
+    }
+
+    await act(async () => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    // All fields should be cleared
+    const clearedInputs = getAllByTestId('otp-input');
+    clearedInputs.forEach(input => {
+      expect(input.props.value).toBe('');
+    });
+
+    // Alert should not be visible
+    expect(queryByText('approved')).toBeNull();
+
+    jest.useRealTimers();
   });
 });
