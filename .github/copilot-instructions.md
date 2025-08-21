@@ -56,6 +56,7 @@
 3.  Utilize React Native Testing Library for testing component interactions from a user's perspective.
 4.  Mock dependencies (API calls, services) using `jest.fn()` or mocking libraries.
 5.  Prioritize testing key user flows and critical functionality.
+6.  We are using TDD paradigm. First build tests and then implement the functionality.
 
 ## VI. Security (Web Security Principles Apply)
 
