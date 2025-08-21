@@ -32,8 +32,8 @@ const OTPScreen: React.FC<OTPScreenProps> = ({ onBack }) => {
         inputsRef.current[idx + 1]?.focus();
       }
 
-      // If all fields are filled, trigger submission
-      if (text && idx === numInputs - 1 && newOtp.every(d => d.length === 1)) {
+      // If all fields are filled, trigger submission (regardless of which input was changed)
+      if (newOtp.every(d => d.length === 1)) {
         handleSubmit(newOtp.join(''));
       }
     }
