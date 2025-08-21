@@ -81,26 +81,31 @@ const OTPScreen: React.FC<OTPScreenProps> = ({ onBack }) => {
       <View style={styles.card}>
         <Text style={styles.title}>Enter OTP</Text>
         <View style={styles.inputsRow}>
-          {Array.from({ length: numInputs }).map((_, idx) => (
-            <TextInput
-              key={idx}
-              testID="otp-input"
-              style={styles.input}
-              keyboardType="number-pad"
-              maxLength={1}
-              value={otp[idx]}
-              onChangeText={text => handleChange(text, idx)}
-              ref={ref => {
-                inputsRef.current[idx] = ref;
-              }}
-              editable={!loading}
-              returnKeyType={idx === numInputs - 1 ? 'done' : 'next'}
-              onFocus={() => handleFocus(idx)}
-              selection={selection[idx]}
-              placeholder="-"
-              placeholderTextColor={theme.colors.text2}
-            />
-          ))}
+          {Array.from({ length: numInputs }).map((_, idx) => {
+            let borderColor = theme.colors.pri2;
+            if (approved) borderColor = theme.colors.success;
+            if (failed) borderColor = theme.colors.danger;
+            return (
+              <TextInput
+                key={idx}
+                testID="otp-input"
+                style={[styles.input, { borderColor }]}
+                keyboardType="number-pad"
+                maxLength={1}
+                value={otp[idx]}
+                onChangeText={text => handleChange(text, idx)}
+                ref={ref => {
+                  inputsRef.current[idx] = ref;
+                }}
+                editable={!loading}
+                returnKeyType={idx === numInputs - 1 ? 'done' : 'next'}
+                onFocus={() => handleFocus(idx)}
+                selection={selection[idx]}
+                placeholder="-"
+                placeholderTextColor={theme.colors.text2}
+              />
+            );
+          })}
         </View>
         {loading && <ActivityIndicator testID="otp-loading" style={styles.feedback} color={theme.colors.pri2} />}
         {approved && <Text style={styles.approvedText}>approved</Text>}
