@@ -34,7 +34,6 @@ const OTPScreen = () => {
         setApproved(true);
       } else {
         setOtp(Array(numInputs).fill(''));
-        // Optionally, focus the first input again
         inputsRef.current[0]?.focus();
       }
     }, 1000);
@@ -42,23 +41,25 @@ const OTPScreen = () => {
 
   return (
     <View style={styles.container}>
-      {Array.from({ length: numInputs }).map((_, idx) => (
-        <TextInput
-          key={idx}
-          testID="otp-input"
-          style={styles.input}
-          keyboardType="number-pad"
-          maxLength={1}
-          value={otp[idx]}
-          onChangeText={text => handleChange(text, idx)}
-          ref={ref => {
-            inputsRef.current[idx] = ref;
-          }}
-          editable={!loading}
-          returnKeyType={idx === numInputs - 1 ? 'done' : 'next'}
-        />
-      ))}
-      {loading && <ActivityIndicator testID="otp-loading" style={{ marginLeft: 10 }} />}
+      <View style={styles.inputsRow}>
+        {Array.from({ length: numInputs }).map((_, idx) => (
+          <TextInput
+            key={idx}
+            testID="otp-input"
+            style={styles.input}
+            keyboardType="number-pad"
+            maxLength={1}
+            value={otp[idx]}
+            onChangeText={text => handleChange(text, idx)}
+            ref={ref => {
+              inputsRef.current[idx] = ref;
+            }}
+            editable={!loading}
+            returnKeyType={idx === numInputs - 1 ? 'done' : 'next'}
+          />
+        ))}
+      </View>
+      {loading && <ActivityIndicator testID="otp-loading" style={styles.feedback} />}
       {approved && <Text style={styles.approvedText}>approved</Text>}
     </View>
   );
@@ -66,10 +67,13 @@ const OTPScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
+    margin: 20,
+  },
+  inputsRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
   },
   input: {
     borderWidth: 1,
@@ -81,6 +85,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     borderRadius: 8,
     backgroundColor: '#fff',
+  },
+  feedback: {
+    marginTop: 16,
   },
   approvedText: {
     width: '100%',
