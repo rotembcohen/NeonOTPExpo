@@ -7,7 +7,15 @@ const OTPScreen = () => {
   const [loading, setLoading] = useState(false);
   const [approved, setApproved] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [selection, setSelection] = useState(Array(numInputs).fill({ start: 0, end: 1 }));
   const inputsRef = useRef<(TextInput | null)[]>([]);
+  const handleFocus = (idx: number) => {
+    setSelection(sel =>
+      sel.map((s, i) =>
+        i === idx ? { start: 0, end: otp[idx]?.length || 0 } : s
+      )
+    );
+  };
 
   const handleChange = (text: string, idx: number) => {
     if (/^\d?$/.test(text)) {
@@ -68,6 +76,8 @@ const OTPScreen = () => {
             }}
             editable={!loading}
             returnKeyType={idx === numInputs - 1 ? 'done' : 'next'}
+            onFocus={() => handleFocus(idx)}
+            selection={selection[idx]}
           />
         ))}
       </View>
