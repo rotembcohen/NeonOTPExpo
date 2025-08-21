@@ -35,3 +35,79 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Build output
+build/
+.expo-shared/
+
+# Environment files
+.env
+.env.*
+
+# Metro
+metro-cache/
+
+# VS Code
+.vscode/
+
+# Misc
+*.log
+coverage/
+
+# React Native
+android/app/build/
+ios/Pods/
+ios/build/
+*.keystore
+
+# Expo managed workflow
+*.expo/*
+.expo-go
+
+# Watchman
+.watchmanconfig
+
+# Bundle output
+*.bundle
+*.map
+
+# Expo assets
+assets/**/*.db
+assets/**/*.sqlite
+assets/**/*.realm
+
+# Temporary files
+*.tmp
+*.temp
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Misc
+*.swp
+*.swo
+
+# IDEs
+.idea/
+*.iml
+
+# CocoaPods
+Pods/
+
+# Xcode
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata
+*.xcodeproj
+
+# Android Studio
+*.iml
+.gradle/
+local.properties
+
+# NPM package lock
+package-lock.json
+yarn.lock
