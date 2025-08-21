@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet, ActivityIndicator, Text } from 'react-native';
 
 const OTPScreen = () => {
@@ -38,10 +38,18 @@ const OTPScreen = () => {
       } else {
         setOtp(Array(numInputs).fill(''));
         setFailed(true);
-        inputsRef.current[0]?.focus();
+        // focus will be handled in useEffect
       }
     }, 1000);
   };
+  useEffect(() => {
+    if (failed) {
+      // Wait for the inputs to be cleared and rendered
+      setTimeout(() => {
+        inputsRef.current[0]?.focus();
+      }, 50);
+    }
+  }, [failed]);
 
   return (
     <View style={styles.container}>
