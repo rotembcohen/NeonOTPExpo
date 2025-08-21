@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   backButtonRow: {
     position: 'absolute',
     top: 40,
-    left: 10,
+    left: 0,
     zIndex: 10,
     paddingTop: 12,
   },
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     color: '#007AFF',
     fontWeight: '500',
     paddingVertical: 4,
-    paddingHorizontal: 8,
+    paddingHorizontal: 0,
   },
   container: {
     flex: 1,
