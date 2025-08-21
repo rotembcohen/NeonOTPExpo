@@ -30,7 +30,9 @@ describe('<OTPScreen />', () => {
     const { getAllByTestId } = render(<OTPScreen />);
     const inputs = getAllByTestId('otp-input');
     // Focus the first input
-    inputs[0].props.onFocus && inputs[0].props.onFocus();
+    await act(async () => {
+      inputs[0].props.onFocus && inputs[0].props.onFocus();
+    });
     // Enter a digit in the first input
     await act(async () => {
       fireEvent.changeText(inputs[0], '1');
