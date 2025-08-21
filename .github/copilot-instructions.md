@@ -1,16 +1,4 @@
----
-#tool:show-notification
-{
-    "message": "OTP input auto-focus and test implemented, all tests passing and changes committed.",
-    "sound": true
-}
 <rules>
-    <notify>
-    When you are done, use the #tool:show-notification tool to notify the user that you have completed the task.
-    
-    Set `sound` to `true`
-    </notify>
-
     <use_tdd>
     Whenever I ask you to implement a feature:
     1. First outline your implementation as a multi-step plan.
