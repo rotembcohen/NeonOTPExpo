@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 
 import App from '../App';
 import OTPScreen from '../OTPScreen';
@@ -8,6 +8,14 @@ describe('<App />', () => {
     const { getByText } = render(<App />);
 
     getByText('Welcome!');
+  });
+
+  test('shows OTP screen when "Open OTP" button is pressed', () => {
+    const { getByText, getAllByTestId } = render(<App />);
+    const openOtpButton = getByText('Open OTP');
+    fireEvent.press(openOtpButton);
+    const inputs = getAllByTestId('otp-input');
+    expect(inputs).toHaveLength(6);
   });
 });
 

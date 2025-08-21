@@ -8,7 +8,7 @@
     <edit_file>
     At the end of ANY conversation and changes to files are made turn with me where you create or edit a file for me:
 
-    1. Stage all changes
+    1. Stage all changes once all tests have passed
     2. Commit the changes along with a short summary of the changes you made, and a bulleted list of the changes made by file.
     </edit_file>
 </rules>
