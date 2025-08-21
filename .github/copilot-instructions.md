@@ -1,6 +1,11 @@
 <rules>
+    <quick_q>
+    Whenever I ask you a simple thing (I start my prompt by ^s):
+    Do the minimum changes required to resolve my request.
+    </quick_q>
+
     <use_tdd>
-    Whenever I ask you to implement a feature:
+    Whenever I ask you to implement a feature (I start my prompt by ^f):
     1. First outline your implementation as a multi-step plan.
     2. Break down the process to steps that can be implemented as progressive code changes.
     3. Implement the unit test required only for the next step. Only add tests if there are no existing tests for the functionality being implemented.
