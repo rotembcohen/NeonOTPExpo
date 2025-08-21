@@ -1,7 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, ActivityIndicator, Text } from 'react-native';
+import { View, TextInput, StyleSheet, ActivityIndicator, Text, Pressable } from 'react-native';
 
-const OTPScreen = () => {
+type OTPScreenProps = {
+  onBack?: () => void;
+};
+
+const OTPScreen: React.FC<OTPScreenProps> = ({ onBack }) => {
   const numInputs = 6;
   const [otp, setOtp] = useState(Array(numInputs).fill(''));
   const [loading, setLoading] = useState(false);
@@ -51,6 +55,13 @@ const OTPScreen = () => {
     }, 1000);
   };
   useEffect(() => {
+    // Focus first input on mount
+    setTimeout(() => {
+      inputsRef.current[0]?.focus();
+    }, 50);
+  }, []);
+
+  useEffect(() => {
     if (failed) {
       // Wait for the inputs to be cleared and rendered
       setTimeout(() => {
@@ -61,6 +72,11 @@ const OTPScreen = () => {
 
   return (
     <View style={styles.container}>
+      {onBack && (
+        <Pressable style={styles.backButtonRow} onPress={onBack} accessibilityLabel="Back">
+          <Text style={styles.backButtonText}>{'‹'} Back</Text>
+        </Pressable>
+      )}
       <View style={styles.inputsRow}>
         {Array.from({ length: numInputs }).map((_, idx) => (
           <TextInput
@@ -82,16 +98,31 @@ const OTPScreen = () => {
         ))}
       </View>
       {loading && <ActivityIndicator testID="otp-loading" style={styles.feedback} />}
-  {approved && <Text style={styles.approvedText}>approved</Text>}
-  {failed && <Text style={styles.failedText}>failed</Text>}
+      {approved && <Text style={styles.approvedText}>approved</Text>}
+      {failed && <Text style={styles.failedText}>failed</Text>}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  backButtonRow: {
+    position: 'absolute',
+    top: 40,
+    left: 10,
+    zIndex: 10,
+    paddingTop: 12,
+  },
+  backButtonText: {
+    fontSize: 20,
+    color: '#007AFF',
+    fontWeight: '500',
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+  },
   container: {
+    flex: 1,
     alignItems: 'center',
-    margin: 20,
+    justifyContent: 'center',
   },
   inputsRow: {
     flexDirection: 'row',

@@ -14,7 +14,7 @@ export default function App() {
           <Button title="Open OTP" onPress={() => setShowOTP(true)} />
         </>
       ) : (
-        <OTPScreen />
+        <OTPScreen onBack={() => setShowOTP(false)} />
       )}
       <StatusBar style="auto" />
     </View>
