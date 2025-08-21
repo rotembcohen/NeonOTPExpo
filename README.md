@@ -14,8 +14,12 @@ A modern, beautiful React Native (Expo) app for OTP (One-Time Password) code ent
 ### ✅ All Tests Passing
 ![All tests passing](assets/screenshot.png)
 
-### 📹 App in Action
-<video src="assets/demo.mp4" controls width="320"></video>
+
+### 📹 App in Action (GIF)
+![App demo in action](assets/output.gif)
+
+### 📥 Downloadable Video
+[Download MP4 demo](assets/demo.mp4)
 
 
 ## Getting Started
